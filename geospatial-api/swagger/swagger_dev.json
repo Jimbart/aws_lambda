@@ -1,0 +1,2244 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-10-24T13:25:47Z",
+    "title": "ARMS4"
+  },
+  "host": "x4bixbcudi.execute-api.us-east-1.amazonaws.com",
+  "basePath": "/dev",
+  "tags": [
+    {
+      "name": "arms",
+      "description": "ARMS Backend"
+    },
+    {
+      "name": "mobility",
+      "description": "Mobility Backend"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/arms/redis/obtener-key": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para obtener el json por un key dado",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener json de un key dado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_key"
+            }
+          }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_key_redis}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/viajes/autorizar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para autorizar los viajes",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para autorizar los viajes dado dado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/autorizar_viajes"
+            }
+          }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.autorizar_viajes}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/viajes/predespegar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para predespegar un viaje (se envian los datos a firebase y se genera el Token)",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para predespegar un viaje",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/predespegar_viaje"
+            }
+          }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.predespegar_viajes}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/viajes/obtener-por-status": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para obtener un array de viajes por status",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener un array de viajes por status y cedi",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_viajes"
+            }
+          }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_viajes_por_status}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/arcos/validar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para validar parejas faltantes de arcos",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para validar la existencia de arcos",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arcos_validar"
+            }
+          }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.validar_arcos}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/arcos/calcular": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para mandar a calcular arcos faltantes",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para validarmandar a calcular los arcos",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arcos_calcular"
+            }
+          }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.calcular_arcos}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/arcos/obtener-errores": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para obtener los errores de arcos en SQS",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener los errores",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/arcos_obtener_errores"
+            }
+          }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_arcos_errores}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/destinos/validar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para validar la existencia de los destinos de un cedi",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para validar los destinos de un cedi",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidarDestinos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ValidarDestinos"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.validar_destinos}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/destinos/registrar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para registrar de los destinos de un cedi",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para registrar los destinos de un cedi",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registrar_destinos_cedis"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.registrar_destinos_cedis}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/destinos/obtener": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para obtener los destinos de un cedi",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener un array de los destinos de un cedi",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_destinos_cedis"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_destinos_cedis}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/planes/listar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para listar los planes de un cedis",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para listar los planes",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/listar_planes"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.listar_planes}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/cedis/listar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para listar los cedis de un usuario desde un correo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para listar los cedis",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/listar_cedis"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.listar_cedis}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/preferencias/motor/obtener": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para obetener las preferencias del motor de un perfil dado",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener la lista de perfiles, las preferencias del perfil dado y el catalogo de preferencias del motor",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_preferencias_motor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_preferencias_motor}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/preferencias/default/obtener": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para obetener las preferencias por default incluyendo las del motor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener la lista de preferencias por default",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_preferencias_default"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_preferencias_default}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/preferencias/usuario/obtener": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para obetener las preferencias del motor de un perfil dado",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener la lista de perfiles, las preferencias del perfil dado y el catalogo de preferencias del motor",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_preferencias_usuario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_preferencias_usuario}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/vehiculos/obtener": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "para obtener los vehiculos de un cedis",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener una lista de vehiculos de un cedis",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_vehiculos_cedis"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_vehiculos_cedis}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/vehiculos/registrar": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para registrar los vehiculos de un cedis",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para registrar de una lista de vehiculos de un cedis",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registrar_vehiculos_cedis"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.registrar_vehiculos_cedis}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/arms/coordenadas/obtener": {
+      "post": {
+        "tags": [
+          "arms"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para obtener las coordenadas de una lista de direcciones dada",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para obtener las coordenadas",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/obtener_coordenadas"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.obtener_coordenadas}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/mobility/login": {
+      "post": {
+        "tags": [
+          "mobility"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para hacer login en mobility",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para hacer login en mobility",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/login_mobility"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.login_mobility}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/mobility/token/validar": {
+      "post": {
+        "tags": [
+          "mobility"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para validar el token de un viaje en mobility",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para validar el token de un viaje en mobility",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/validar_token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.validar_token}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/mobility/token/asignar": {
+      "post": {
+        "tags": [
+          "mobility"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para asignar el token de un viaje en mobility",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para asignar el token de un viaje en mobility",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tomar_token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.tomar_token}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    },
+    "/mobility/viaje/liquidar": {
+      "post": {
+        "tags": [
+          "mobility"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Para persistir la info de un viaje desde mobility a firebase",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objetos necesarios para guardar la info de mobility al viaje en firebase",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/liquidar_viaje"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:706002245100:function:${stageVariables.liquidar_viaje_mob}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Empty": {
+      "type": "object",
+      "title": "Empty Schema"
+    },
+    "id_cedi": {
+      "type": "object",
+      "required": [
+        "id_cedi"
+      ],
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "xml": {
+        "name": "id cedi"
+      },
+      "example": 16
+    },
+    "obtener_key": {
+      "type": "object",
+      "required": [
+        "uuid",
+        "fecha"
+      ],
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "example": "uuid001"
+        },
+        "fecha": {
+          "type": "string",
+          "example": "2018-10-24 13:59:51"
+        }
+      }
+    },
+    "autorizar_viajes": {
+      "type": "object",
+      "required": [
+        "id_cedi",
+        "viajes",
+        "idEmpresa",
+        "idPlaneador",
+        "idProyecto",
+        "sesion",
+        "planeador",
+        "proyecto"
+      ],
+      "properties": {
+        "id_cedi": {
+          "$ref": "#/definitions/id_cedi"
+        },
+        "viajes": {
+          "type": "array",
+          "xml": {
+            "name": "fleteras",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/viaje"
+          }
+        },
+        "idEmpresa": {
+          "type": "integer"
+        },
+        "idPlaneador": {
+          "type": "integer"
+        },
+        "idProyecto": {
+          "type": "integer"
+        },
+        "sesion": {
+          "type": "string"
+        },
+        "planeador": {
+          "type": "string"
+        },
+        "proyecto": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "idEmpresa": 1,
+        "id_cedi": 1,
+        "idPlaneador": 1,
+        "idProyecto": 296,
+        "sesion": "Lalo 2019-03-20 22:59",
+        "planeador": "Eduardo Giles",
+        "proyecto": "Nombre del Proyecto",
+        "viajes": {
+          "idEmpresa": 1,
+          "id_cedi": 16,
+          "id_planeador": 2,
+          "id_proyecto": 0,
+          "sesion": "Lalo 2019-03-20 22:59",
+          "proyecto": "Nombre del Proyecto",
+          "viajes": [
+            {
+              "co2": 10,
+              "viaje": 1,
+              "costoFerry": 0,
+              "costoHotel": 1050,
+              "costoThermo": 0,
+              "costoComidas": 480,
+              "costoCombustible": 1093.1,
+              "status": "Autorizado",
+              "ocupacionVolumenSeco": 10,
+              "ocupacionVolumenFrio": 10,
+              "ocupacionVolumenTotal": 10,
+              "ocupacionPeso": 10,
+              "tiradas": 2,
+              "pedidos": 2,
+              "peso": 100,
+              "volumen": 100,
+              "valor": 10000,
+              "piezas": 10000,
+              "litrosCombustible": 1000,
+              "litrosThemo": 100,
+              "costoTotal": 100000,
+              "costoFletera": 0,
+              "infraccionReglaPeso": false,
+              "infraccionReglaVolumen": false,
+              "infraccionReglaValor": false,
+              "infraccionReglaAcceso": false,
+              "infraccionDestinoDedicado": false,
+              "infraccionVentanaEntrega": false,
+              "infraccionEntrega1Dia": false,
+              "infraccionDiasApertura": false,
+              "infraccionCompatibilidad": false,
+              "infraccion": false,
+              "numPernoctas": 1,
+              "numComidas": 1,
+              "numDescansos": 1,
+              "tiempoTotalViaje": 1,
+              "tiempoTotalTrayecto": 1,
+              "tiempoTotalDescansos": 1,
+              "tiempoTotalEspera": 1,
+              "tiempoTotalComidas": 1,
+              "tiempoTotalPernocta": 1,
+              "tiempoTotalDescarga": 1,
+              "tiempoTotalServicio": 1,
+              "fechaSalida": "2019-03-20 12:00",
+              "fechaRetorno": "2019-03-20 08:00",
+              "tipoDistribucion": "TR1",
+              "km": 11000,
+              "idCediAterrizaje": 16,
+              "idVehiculo": 3,
+              "itinerario": [
+                {
+                  "actividad": "Comida",
+                  "fechaActividadInicio": "2019-03-20 12:00",
+                  "fechaActividadFin": "2019-03-20 12:00",
+                  "duracion": 1,
+                  "tirada": 1
+                }
+              ],
+              "destinos": [
+                {
+                  "idDestino": 5461,
+                  "tirada": 1,
+                  "fechaSalida": "2019-03-20 12:00",
+                  "fechaEntrega": "2019-03-20 08:00",
+                  "tiemServicio": 30,
+                  "pedidos": [
+                    {
+                      "pedido": "500 - 1339938",
+                      "refrigerado": 0,
+                      "tipoEnvio": "Entrega",
+                      "tipoPedido": "Ordinario",
+                      "vendedor": "Juancho",
+                      "piezas": 0,
+                      "volumen": 0,
+                      "peso": 0,
+                      "valor": 0,
+                      "producto": "Vacuna",
+                      "familia": 0,
+                      "tiemDescarga": 0,
+                      "dedicado": 0,
+                      "idDestinoTR2": 5461,
+                      "ventanaFechaInicial": "2019-03-20",
+                      "ventanaFechaFinal": "2019-03-20",
+                      "ventanaLunVieIni1": "08:00",
+                      "ventanaLunVieFin1": "08:00",
+                      "ventanaLunVieIni2": "08:00",
+                      "ventanaLunVieFin2": "08:00",
+                      "ventanaSabDomIni": "08:00",
+                      "ventanaSabDomFin": "08:00"
+                    }
+                  ]
+                },
+                {
+                  "idDestino": 5462,
+                  "pedidos": [
+                    {
+                      "pedido": "500 - 1339938",
+                      "refrigerado": 0,
+                      "tipoEnvio": "Entrega",
+                      "tipoPedido": "Ordinario",
+                      "vendedor": "Juancho",
+                      "piezas": 0,
+                      "volumen": 0,
+                      "peso": 0,
+                      "valor": 0,
+                      "producto": "Vacuna",
+                      "familia": 0,
+                      "tiemDescarga": 0,
+                      "dedicado": 0,
+                      "idDestinoTR2": 5462,
+                      "ventanaFechaInicial": "2019-03-20",
+                      "ventanaFechaFinal": "2019-03-20",
+                      "ventanaLunVieIni1": "08:00",
+                      "ventanaLunVieFin1": "08:00",
+                      "ventanaLunVieIni2": "08:00",
+                      "ventanaLunVieFin2": "08:00",
+                      "ventanaSabDomIni": "08:00",
+                      "ventanaSabDomFin": "08:00"
+                    }
+                  ],
+                  "tirada": 2,
+                  "fechaSalida": "2019-03-20 12:00",
+                  "fechaEntrega": "2019-03-20 08:00",
+                  "tiemServicio": 40
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "nodos": {
+      "type": "object",
+      "properties": {
+        "nodo": {
+          "type": "string",
+          "example": "Nombre Destino"
+        },
+        "parada": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    },
+    "arcos_validar": {
+      "type": "object",
+      "required": [
+        "id_cedi"
+      ],
+      "properties": {
+        "id_cedi": {
+          "$ref": "#/definitions/id_cedi"
+        },
+        "destinos": {
+          "example": [
+            "553",
+            "540",
+            "547",
+            "123"
+          ]
+        }
+      }
+    },
+    "arcos_calcular": {
+      "type": "object",
+      "required": [
+        "id_cedi"
+      ],
+      "properties": {
+        "id_cedi": {
+          "$ref": "#/definitions/id_cedi"
+        },
+        "destinos": {
+          "example": [
+            "553",
+            "540",
+            "547",
+            "123"
+          ]
+        },
+        "UUID": {
+          "example": 10
+        }
+      }
+    },
+    "arcos_obtener_errores": {
+      "type": "object",
+      "required": [
+        "UUID"
+      ],
+      "properties": {
+        "UUID": {
+          "example": 10
+        }
+      }
+    },
+    "listar_planes": {
+      "type": "object",
+      "required": [
+        "id_cedi"
+      ],
+      "properties": {
+        "id_cedi": {
+          "$ref": "#/definitions/id_cedi"
+        }
+      }
+    },
+    "ValidarDestinos": {
+      "type": "object",
+      "required": [
+        "destinos",
+        "id_cedi"
+      ],
+      "properties": {
+        "destinos": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uniqueItems": true
+        },
+        "id_cedi": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "xml": {
+        "name": "ValidarDestinos"
+      },
+      "example": {
+        "destinos": [
+          "Destino 1",
+          "Destino 2"
+        ],
+        "id_cedi": 16
+      }
+    },
+    "listar_cedis": {
+      "type": "object",
+      "required": [
+        "correo"
+      ],
+      "properties": {
+        "correo": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "listar_cedis"
+      },
+      "example": {
+        "correo": "example@algo.com"
+      }
+    },
+    "obtener_preferencias_motor": {
+      "type": "object",
+      "required": [
+        "id_cedis",
+        "perfil"
+      ],
+      "properties": {
+        "id_cedis": {
+          "type": "integer"
+        },
+        "perfil": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "listar_cedis"
+      },
+      "example": {
+        "id_cedis": 16,
+        "perfil": "default"
+      }
+    },
+    "obtener_preferencias_default": {
+      "type": "object",
+      "required": [
+        "id_cedis",
+        "perfil"
+      ],
+      "properties": {
+        "id_cedis": {
+          "type": "integer"
+        },
+        "perfil": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "listar_cedis"
+      },
+      "example": {
+        "id_cedis": 16,
+        "perfil": "default"
+      }
+    },
+    "obtener_preferencias_usuario": {
+      "type": "object",
+      "required": [
+        "id_cedis",
+        "correo"
+      ],
+      "properties": {
+        "id_cedis": {
+          "type": "integer"
+        },
+        "correo": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "listar_cedis"
+      },
+      "example": {
+        "id_cedis": 16,
+        "correo": "example@algo.com"
+      }
+    },
+    "obtener_vehiculos_cedis": {
+      "type": "object",
+      "required": [
+        "id_cedis"
+      ],
+      "properties": {
+        "id_cedis": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "listar_vehiculos"
+      },
+      "example": {
+        "id_cedis": 16
+      }
+    },
+    "registrar_vehiculos_cedis": {
+      "type": "object",
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "example": 16
+        },
+        "vehiculos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/vehiculos"
+          }
+        }
+      }
+    },
+    "registrar_destinos_cedis": {
+      "type": "object",
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "example": 16
+        },
+        "destinos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/destino"
+          }
+        }
+      }
+    },
+    "obtener_destinos_cedis": {
+      "type": "object",
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "example": 16
+        }
+      }
+    },
+    "vehiculos": {
+      "type": "object",
+      "properties": {
+        "idCedi": {
+          "type": "integer"
+        },
+        "Cantidad": {
+          "type": "integer"
+        },
+        "TipoVehiculo": {
+          "type": "string"
+        },
+        "Rendimiento": {
+          "type": "number"
+        },
+        "Talla": {
+          "type": "string"
+        },
+        "HuellaCarbono": {
+          "type": "number"
+        },
+        "TipoCombustible": {
+          "type": "string"
+        },
+        "VolumenSeco": {
+          "type": "number"
+        },
+        "PesoSeco": {
+          "type": "number"
+        },
+        "VolumenFrio": {
+          "type": "number"
+        },
+        "PesoFrio": {
+          "type": "number"
+        },
+        "VolumenMixto": {
+          "type": "number"
+        },
+        "RendimientoThermo": {
+          "type": "number"
+        },
+        "Fletera": {
+          "type": "integer"
+        }
+      },
+      "example": {
+        "Talla": "M",
+        "Fletera": "SILODISA",
+        "Cantidad": 0,
+        "PesoFrio": 0,
+        "PesoSeco": 0,
+        "Rendimiento": 0,
+        "VolumenFrio": 0,
+        "VolumenSeco": 0,
+        "TipoVehiculo": "FL360",
+        "VolumenMixto": 0,
+        "HuellaCarbono": 20,
+        "TipoCombustible": "GASOLINA",
+        "RendimientoThermo": 0
+      }
+    },
+    "destino": {
+      "type": "object",
+      "properties": {
+        "destino": {
+          "type": "string"
+        },
+        "latitud": {
+          "type": "number"
+        },
+        "longitud": {
+          "type": "number"
+        },
+        "zona": {
+          "type": "string"
+        },
+        "restriccionVehiculo": {
+          "type": "string"
+        },
+        "restriccionVolumen": {
+          "type": "number"
+        },
+        "dedicado": {
+          "type": "integer"
+        },
+        "region": {
+          "type": "string"
+        },
+        "subregion": {
+          "type": "string"
+        },
+        "estado": {
+          "type": "string"
+        },
+        "municipio": {
+          "type": "string"
+        },
+        "colonia": {
+          "type": "string"
+        },
+        "calleNumero": {
+          "type": "string"
+        },
+        "codigoPostal": {
+          "type": "string"
+        },
+        "ventanaLunVieIni1": {
+          "type": "string"
+        },
+        "ventanaLunVieFin1": {
+          "type": "string"
+        },
+        "ventanaLunVieIni2": {
+          "type": "string"
+        },
+        "ventanaLunVieFin2": {
+          "type": "string"
+        },
+        "defaseHorario": {
+          "type": "integer"
+        },
+        "L": {
+          "type": "integer"
+        },
+        "M": {
+          "type": "integer"
+        },
+        "Mi": {
+          "type": "integer"
+        },
+        "J": {
+          "type": "integer"
+        },
+        "V": {
+          "type": "integer"
+        },
+        "S": {
+          "type": "integer"
+        },
+        "D": {
+          "type": "integer"
+        },
+        "tiempoServicio": {
+          "type": "integer"
+        },
+        "contacto1": {
+          "type": "string"
+        },
+        "telefono1": {
+          "type": "string"
+        },
+        "correo1": {
+          "type": "string"
+        },
+        "contacto2": {
+          "type": "string"
+        },
+        "telefono2": {
+          "type": "string"
+        },
+        "correo2": {
+          "type": "string"
+        },
+        "hotel": {
+          "type": "string"
+        },
+        "factorSubidaS": {
+          "type": "number"
+        },
+        "factorSubidaM": {
+          "type": "number"
+        },
+        "factorSubidaL": {
+          "type": "number"
+        },
+        "factorIntermedioS": {
+          "type": "number"
+        },
+        "factorIntermedioM": {
+          "type": "number"
+        },
+        "factorIntermedioL": {
+          "type": "number"
+        },
+        "factorRetornoS": {
+          "type": "number"
+        },
+        "factorRetornoM": {
+          "type": "number"
+        },
+        "factorRetornoL": {
+          "type": "number"
+        },
+        "recalcularDestino": {
+          "type": "integer"
+        },
+        "validado": {
+          "type": "integer"
+        },
+        "local": {
+          "type": "integer"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "hotelSubida": {
+          "type": "integer"
+        },
+        "hotelRetorno": {
+          "type": "integer"
+        },
+        "ventanaSabDomIni": {
+          "type": "string"
+        },
+        "ventanaSabDomFin": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "D": 0,
+        "J": 1,
+        "L": 1,
+        "M": 1,
+        "S": 0,
+        "V": 1,
+        "Mi": 1,
+        "zona": "",
+        "alias": "NULL",
+        "hotel": "Básico",
+        "local": 0,
+        "estado": "DISTRITO FEDERAL",
+        "region": "3030",
+        "colonia": "SAN PABLO TEPETLAPA",
+        "correo1": "ggonzalezo@silodisa.com.mx",
+        "correo2": "NA",
+        "destino": "775-CMF DIVISION DEL NORTE (P)",
+        "latitud": 19.321039,
+        "dedicado": 0,
+        "longitud": -99.138758,
+        "validado": 0,
+        "contacto1": "GERARDO GONZALEZ ORNELAS",
+        "contacto2": "NA",
+        "idDestino": 3850,
+        "municipio": "DELEG COYOACAN",
+        "subregion": "3030",
+        "telefono1": "2905",
+        "telefono2": "NA",
+        "calleNumero": "DIVISON DEL NORTE NUMERO 3755",
+        "hotelSubida": 0,
+        "codigoPostal": "04620",
+        "hotelRetorno": 0,
+        "factorSubidaL": 150,
+        "factorSubidaM": 150,
+        "factorSubidaS": 150,
+        "desfaseHorario": 0,
+        "factorRetornoL": 400,
+        "factorRetornoM": 350,
+        "factorRetornoS": 350,
+        "tiempoServicio": 30,
+        "ventanaSabDomFin": "14:00:00",
+        "factorIntermedioL": 300,
+        "factorIntermedioM": 200,
+        "factorIntermedioS": 200,
+        "recalcularDestino": 1,
+        "restriccionVolumen": 11.880000114440918,
+        "ventanaLunVieFin1": "14:00:00",
+        "ventanaSabDomIni": "09:00:00",
+        "restriccionVehiculo": "FL360",
+        "ventanaLunVieFin2": "14:00:00",
+        "ventanaLunVieIni1": "08:00:00",
+        "ventanaLunVieIni2": "08:00:00"
+      }
+    },
+    "pedido": {
+      "type": "object",
+      "properties": {
+        "pedido": {
+          "type": "string"
+        },
+        "tipoPedido": {
+          "type": "string"
+        },
+        "piezas": {
+          "type": "integer"
+        },
+        "volumen": {
+          "type": "number"
+        },
+        "peso": {
+          "type": "number"
+        },
+        "ventanaFechaInicio": {
+          "type": "string"
+        },
+        "ventanaFechaFin": {
+          "type": "string"
+        },
+        "ventanaLunVieIni1": {
+          "type": "string"
+        },
+        "ventanaLunVieFin1": {
+          "type": "string"
+        },
+        "dedicado": {
+          "type": "integer"
+        },
+        "valor": {
+          "type": "number"
+        },
+        "producto": {
+          "type": "string"
+        },
+        "recolectaCEDI2": {
+          "type": "integer"
+        },
+        "tiemDescarga": {
+          "type": "integer"
+        },
+        "tipoEnvio": {
+          "type": "integer"
+        },
+        "fechaEntregaTR2": {
+          "type": "string"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "familia": {
+          "type": "string"
+        },
+        "idDestinoTR2": {
+          "type": "integer"
+        },
+        "idDestinoRecolecta": {
+          "type": "integer"
+        },
+        "ventanaLunVieIni2": {
+          "type": "string"
+        },
+        "ventanaLunVieFin2": {
+          "type": "string"
+        },
+        "ventanaSabDomIni": {
+          "type": "string"
+        },
+        "ventanaSabDomFin": {
+          "type": "string"
+        }
+      }
+    },
+    "viaje": {
+      "type": "object",
+      "properties": {
+        "idCedi": {
+          "type": "integer"
+        },
+        "piezas": {
+          "type": "number"
+        },
+        "volumen": {
+          "type": "number"
+        },
+        "peso": {
+          "type": "number"
+        },
+        "valor": {
+          "type": "number"
+        },
+        "idViaje": {
+          "type": "integer"
+        },
+        "idPlan": {
+          "type": "integer"
+        },
+        "co2": {
+          "type": "number"
+        },
+        "costoFerry": {
+          "type": "number"
+        },
+        "costoHotel": {
+          "type": "number"
+        },
+        "costoThermo": {
+          "type": "number"
+        },
+        "costoComidas": {
+          "type": "number"
+        },
+        "costoCombustible": {
+          "type": "number"
+        },
+        "status": {
+          "type": "integer"
+        },
+        "ocupacionVolumenSeco": {
+          "type": "number"
+        },
+        "ocupacionVolumenFrio": {
+          "type": "number"
+        },
+        "ocupacionVolumenTotal": {
+          "type": "number"
+        },
+        "ocupacionPeso": {
+          "type": "number"
+        },
+        "token": {
+          "type": "string"
+        },
+        "idVehiculo": {
+          "type": "integer"
+        },
+        "operador": {
+          "type": "string"
+        },
+        "tiradas": {
+          "type": "integer"
+        },
+        "pedidos": {
+          "type": "integer"
+        },
+        "litrosCombustible": {
+          "type": "number"
+        },
+        "litrosThemo": {
+          "type": "number"
+        },
+        "costoTotal": {
+          "type": "number"
+        },
+        "costoFletera": {
+          "type": "number"
+        },
+        "infraccionReglaPeso": {
+          "type": "integer"
+        },
+        "infraccionReglaVolumen": {
+          "type": "integer"
+        },
+        "infraccionReglaValor": {
+          "type": "integer"
+        },
+        "infraccionReglaAcceso": {
+          "type": "integer"
+        },
+        "infraccionDestinoDedicado": {
+          "type": "integer"
+        },
+        "infraccionVentanaEntrega": {
+          "type": "integer"
+        },
+        "infraccionEntrega1Dia": {
+          "type": "integer"
+        },
+        "infraccionDiasApertura": {
+          "type": "integer"
+        },
+        "infraccionCompatibilidad": {
+          "type": "integer"
+        },
+        "infraccion": {
+          "type": "integer"
+        },
+        "numPernoctas": {
+          "type": "integer"
+        },
+        "numComidas": {
+          "type": "integer"
+        },
+        "numDescansos": {
+          "type": "integer"
+        },
+        "tiempoTotalViaje": {
+          "type": "integer"
+        },
+        "tiempoTotalTrayecto": {
+          "type": "integer"
+        },
+        "tiempoTotalDescansos": {
+          "type": "integer"
+        },
+        "tiempoTotalEspera": {
+          "type": "integer"
+        },
+        "tiempoTotalComidas": {
+          "type": "integer"
+        },
+        "tiempoTotalPernocta": {
+          "type": "integer"
+        },
+        "tiempoTotalDescarga": {
+          "type": "integer"
+        },
+        "tiempoTotalServicio": {
+          "type": "integer"
+        },
+        "fechaSalida": {
+          "type": "string"
+        },
+        "fechaRetorno": {
+          "type": "string"
+        },
+        "tipoDsitribucion": {
+          "type": "string"
+        },
+        "km": {
+          "type": "number"
+        },
+        "idCediAterrizaje": {
+          "type": "integer"
+        },
+        "destinos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parada"
+          }
+        },
+        "itinerario": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/itinerario"
+          }
+        }
+      }
+    },
+    "itinerario": {
+      "type": "object",
+      "properties": {
+        "actividad": {
+          "type": "string"
+        },
+        "fechaActividadInicio": {
+          "type": "string"
+        },
+        "fechaActividadFin": {
+          "type": "string"
+        },
+        "duracion": {
+          "type": "integer"
+        },
+        "tirada": {
+          "type": "integer"
+        }
+      }
+    },
+    "parada": {
+      "type": "object",
+      "properties": {
+        "idDestino": {
+          "type": "integer"
+        },
+        "tirada": {
+          "type": "integer"
+        },
+        "fechaSalida": {
+          "type": "string"
+        },
+        "fechaEntrega": {
+          "type": "string"
+        },
+        "pedidos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pedido"
+          }
+        }
+      }
+    },
+    "obtener_coordenadas": {
+      "type": "object",
+      "properties": {
+        "direcciones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Juan Salvador Agraz 97",
+            "Nada"
+          ]
+        }
+      }
+    },
+    "login_mobility": {
+      "type": "object",
+      "required": [
+        "cedi",
+        "password"
+      ],
+      "properties": {
+        "cedi": {
+          "type": "string",
+          "example": "SILODISA"
+        },
+        "password": {
+          "type": "string",
+          "example": "silodisa"
+        }
+      }
+    },
+    "validar_token": {
+      "type": "object",
+      "required": [
+        "id_cedi",
+        "tokenviaje"
+      ],
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "example": 16
+        },
+        "tokenviaje": {
+          "type": "string",
+          "example": 123
+        }
+      }
+    },
+    "tomar_token": {
+      "type": "object",
+      "required": [
+        "id_cedi",
+        "id_viaje",
+        "nombre_operador",
+        "placas",
+        "numero_economico"
+      ],
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "example": 16
+        },
+        "id_viaje": {
+          "type": "integer",
+          "example": 123
+        },
+        "nombre_operador": {
+          "type": "string",
+          "example": "xx"
+        },
+        "placas": {
+          "type": "string",
+          "example": "xxxxxxx"
+        },
+        "numero_economico": {
+          "type": "integer",
+          "example": 123
+        }
+      }
+    },
+    "predespegar_viaje": {
+      "type": "object",
+      "required": [
+        "id_cedi",
+        "id_viaje"
+      ],
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "example": 16
+        },
+        "id_viaje": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    },
+    "obtener_viajes": {
+      "type": "object",
+      "required": [
+        "id_cedi",
+        "status"
+      ],
+      "properties": {
+        "id_cedi": {
+          "type": "integer",
+          "example": 16
+        },
+        "status": {
+          "type": "number",
+          "example": 9.5
+        }
+      }
+    },
+    "liquidar_viaje": {
+      "type": "object",
+      "required": [
+        "id_viaje",
+        "json_viaje"
+      ],
+      "properties": {
+        "id_viaje": {
+          "type": "integer",
+          "example": 1
+        },
+        "json_viaje": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

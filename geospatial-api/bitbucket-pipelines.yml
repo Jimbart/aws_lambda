@@ -1,0 +1,48 @@
+image: python:3.7.2
+pipelines:
+  branches:
+    develop:
+      - step:
+          deployment: test
+          script:
+            - apt-get update # required to install zip
+            - apt-get install -y zip # required for packaging up the application
+            - pip install boto3==1.7.8 # required for deploy.py
+            - pip install configparser
+            - pip install botocore==1.12.71
+            # package up the function for deployment
+            # Be sure to change the arguments to your function files
+            - cp config-dev.ini config.ini
+            - find . -name "*.pyc" -exec rm -f {} \;
+            - zip -r /tmp/Archive_dev.zip * -x *.zip
+            - python deploy.py '/tmp/Archive_dev.zip' dev # run the deployment script
+    beta:
+      - step:
+          deployment: staging
+          script:
+            - apt-get update # required to install zip
+            - apt-get install -y zip # required for packaging up the application
+            - pip install boto3==1.7.8 # required for deploy.py
+            - pip install configparser
+            - pip install botocore==1.12.71
+            # package up the function for deployment
+            # Be sure to change the arguments to your function files
+            - cp config-beta.ini config.ini
+            - find . -name "*.pyc" -exec rm -f {} \;
+            - zip -r /tmp/Archive_beta.zip * -x *.zip
+            - python deploy.py '/tmp/Archive_beta.zip' beta # run the deployment script
+    master:
+      - step:
+          deployment: production
+          script:
+            - apt-get update # required to install zip
+            - apt-get install -y zip # required for packaging up the application
+            - pip install boto3==1.7.8 # required for deploy.py
+            - pip install configparser
+            - pip install botocore==1.12.71
+            # package up the function for deployment
+            # Be sure to change the arguments to your function files
+            - cp config-prod.ini config.ini
+            - find . -name "*.pyc" -exec rm -f {} \;
+            - zip -r /tmp/Archive_prod.zip * -x *.zip
+            - python deploy.py '/tmp/Archive_prod.zip' prod # run the deployment script

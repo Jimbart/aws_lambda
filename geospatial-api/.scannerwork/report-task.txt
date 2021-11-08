@@ -1,0 +1,6 @@
+projectKey=api_arms4
+serverUrl=https://sonarqube.arete.ws
+serverVersion=7.2.1.14109
+dashboardUrl=https://sonarqube.arete.ws/dashboard?id=api_arms4
+ceTaskId=AWanu1pfuuoZXSihXRM8
+ceTaskUrl=https://sonarqube.arete.ws/api/ce/task?id=AWanu1pfuuoZXSihXRM8

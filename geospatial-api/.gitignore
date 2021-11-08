@@ -1,0 +1,11 @@
+.vscode/launch.json
+.idea/
+venv/
+*.pyc
+settings.json
+
+\.DS_Store
+
+.idea/inspectionProfiles/
+
+.idea/
